@@ -1,0 +1,60 @@
+<div class="form-group">
+  <div class="row">
+    <div class="col-auto">
+      <label class="form-label pt-2">{{ attribute.name }}:</label>
+    </div>
+    <div class="col">
+      @switch (attribute.attrType) { @case ('MULTISELECT') {
+      <div class="d-flex justify-content-end mb-2">
+        <button type="button" class="btn btn-primary" (click)="addField()">
+          add
+        </button>
+      </div>
+      @for (value of form().controls.values.controls; track $index) {
+      <div class="d-flex gap-2 mb-2">
+        <input
+          type="text"
+          class="form-control"
+          [formControl]="value"
+          [ngClass]="{ 'is-invalid': value.invalid }"
+          placeholder="Insira o texto"
+        />
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="removeField($index)"
+        >
+          remove
+        </button>
+        @if (value.errors?.['alreadySelected']) {
+        <div class="invalid-feedback">This field is aready selected.</div>
+        }
+      </div>
+      }
+      <button type="button" class="btn btn-danger" (click)="clearEmpty()">
+        remove empty
+      </button>
+      } @case ('SELECT') {
+      <select
+        class="form-select"
+        [ngClass]="{ 'is-invalid': form().controls.values.controls[0].invalid }"
+        [formControl]="form().controls.values.controls[0]"
+        title="title"
+      >
+        <option value=""></option>
+        @for (option of attribute.values; track $index) {
+        <option [value]="option">{{ option }}</option>
+        }
+      </select>
+      } @case('TEXT') {
+      <input
+        type="text"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': form().controls.values.controls[0].invalid }"
+        [formControl]="form().controls.values.controls[0]"
+        placeholder="Insira o texto"
+      />
+      } }
+    </div>
+  </div>
+</div>

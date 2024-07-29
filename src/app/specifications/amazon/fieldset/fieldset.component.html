@@ -1,0 +1,10 @@
+<fieldset>
+  <legend>{{ groupName() }}</legend>
+  @for (group of form().controls; track $index) {
+  <app-fieldset-row
+    class="my-5"
+    [form]="group"
+    [attributes]="attributes()"
+  ></app-fieldset-row>
+  }
+</fieldset>

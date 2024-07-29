@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center gap-2">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="setActive('default')"
+  >
+    Default
+  </button>
+  <button type="button" class="btn btn-secondary" (click)="setActive('amazon')">
+    Amazon
+  </button>
+</div>
+
+<div class="row">
+  <div class="col">
+    <form (submit)="persist()">
+      @switch (activeFormName) { @case ('amazon') {
+      <app-amazon
+        [specifications]="specifications()"
+        [attributes]="attributes()"
+        (formReady)="amazonFormReady($event)"
+      ></app-amazon>
+      } @default {
+      <app-default
+        [specifications]="specifications()"
+        [attributes]="attributes()"
+        (formReady)="defaultFormReady($event)"
+      ></app-default>
+      } }
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="col">
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>

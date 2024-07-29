@@ -1,0 +1,9 @@
+<h2>Amazon form</h2>
+
+@for (kv of formService.form.controls|keyvalue; track $index) {
+<app-fieldset
+  [groupName]="kv.key"
+  [form]="kv.value"
+  [attributes]="attributes()"
+></app-fieldset>
+}

@@ -1,0 +1,5 @@
+<h2>Default form</h2>
+
+@for (array of formService.form.controls; track $index) {
+<app-form-row [form]="array" [attributes]="attributes()"></app-form-row>
+}
